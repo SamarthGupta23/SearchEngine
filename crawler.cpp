@@ -49,27 +49,50 @@ void crawler::start(string url) {
             urls.push(i);
         }
         saveHtml(id);
-        updateGraph(links);
+        updateGraph(links , id);
     }
 }
+
+
 void crawler::end() {
     curl_global_cleanup();
 }
+
+
 string crawler::getHtml(string url) {
     string response = get_html(url);
     cout << response << endl;
     return get_html(url);
 }
 
-void crawler::saveHtml(int id) {}
-void crawler::updateGraph(vector<string> links) {}
-void crawler::editDict(int id, string url) {}
-string crawler::getNextUrl() {
-    return "";
+void crawler::saveHtml(int id) { //wrapper over parser.saveDoc()
+
 }
 
-void crawler::parseHtml(string url) {}
+
+void crawler::updateGraph(vector<string> links , int id) {
+    unordered_set <string> entry;
+    for (auto i : links) {
+        entry.insert(i);
+    }
+    linkGraph[id] = entry;
+}
+void crawler::editDict(int id, string url) {
+    dictToUrl[id] = url;
+    dictToId[url] = id;
+}
+string crawler::getNextUrl() {
+    string output = urls.front();
+    urls.pop();
+    return output;
+}
+
+void crawler::parseHtml(string url) {  //wrapper over parser.parse()
+
+}
 int crawler::genID() {
-    return 0;
+    int id = docNumber;
+    docNumber++;
+    return id;
 }
 

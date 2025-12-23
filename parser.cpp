@@ -32,9 +32,11 @@ string parser::getText() {
 }
 
 vector <string> parser::getLinks() {
-    return {};
+    return this->links;
 }
 
 void parser::saveDoc(int id) {}
 
-void parser::setAddress(string folderAddress) {}
+void parser::setAddress(string folderAddress) {
+    this->address = folderAddress;
+}
